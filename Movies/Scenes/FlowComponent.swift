@@ -8,13 +8,33 @@
 
 import UIKit
 
-protocol FlowComponent {
-    func proceed(to flow: AnyFlow)
+protocol MoviesFlowComponent: FlowNavigationPerformer { }
+
+enum MoviesFlowID {
+    case login
+    case forgotPassword
+    case changePassword
+    case signUp
+    case movieList
 }
 
-extension FlowComponent where Self: UIViewController {
+enum NavigationID {
+    case fromLoginToChangePassword
+    case fromLoginToForgotPassword
+    case fromLoginToSignUp
+    case fromMovieListToMovieDetail
+    case logout
+}
+
+protocol MoviesFlow {
+    static var id: MoviesFlowID { get }
+}
+
+extension MoviesFlowComponent where Self: UIViewController {
     
-    func proceed(to flow: AnyFlow) {
+    func perform(_ navigation: FlowNavigation) {
+        let flow = navigation.destination
+        
         let vc: UIViewController?
         if let flow = flow as? LoginFlow {
             vc = LoginViewController.instantiate(with: flow)

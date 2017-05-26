@@ -12,7 +12,10 @@ struct ForgotPasswordState: State {
     func react(to action: Action) { }
 }
 
-class ForgotPasswordFlow: Flow<ForgotPasswordState> {
+class ForgotPasswordFlow: Flow<ForgotPasswordState>, MoviesFlow {
+    
+    static let id: MoviesFlowID = .forgotPassword
+    
     convenience init() {
         self.init(state: ForgotPasswordState())
     }

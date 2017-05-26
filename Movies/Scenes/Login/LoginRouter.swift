@@ -10,19 +10,26 @@ import UIKit
 
 class LoginRouter: Router {
     
-    func perform(_ segue: Segue) -> AnyFlow? {
+    unowned let flow: LoginFlow
+    
+    init(flow: LoginFlow) {
+        self.flow = flow
+    }
+    
+    func perform(_ segue: Segue) -> FlowNavigation? {
         guard let segue = segue as? LoginSegue else { return nil }
         switch segue {
         case .signUp:
-            return SignUpFlow()
+            return FlowNavigation(SignUpFlow())
         case .login(let response):
             if response.isPasswordExpired {
-                return ChangePasswordFlow()
+                return FlowNavigation(ChangePasswordFlow())
             } else {
-                return MovieListFlow(service: MockMoviesService(delay: 1.5))
+                let flow = MovieListFlow(service: MockMoviesService(delay: 1.5))
+                return FlowNavigation(flow)
             }
         case .forgotPassword:
-            return ForgotPasswordFlow()
+            return FlowNavigation(ForgotPasswordFlow())
         }
     }
 }

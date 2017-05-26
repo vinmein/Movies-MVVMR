@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoginViewInterface: class, ErrorHandler, FlowComponent {
+protocol LoginViewInterface: class, ErrorHandler, FlowNavigationPerformer {
     func setLoading(_ isLoading: Bool)
 }
 
@@ -28,7 +28,7 @@ class LoginUpdater: Subscriber {
         }
     }
     
-    func proceed(to nextFlow: AnyFlow) {
-        view.proceed(to: nextFlow)
+    func perform(_ navigation: FlowNavigation) {
+        
     }
 }

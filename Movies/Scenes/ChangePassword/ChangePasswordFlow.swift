@@ -12,7 +12,10 @@ struct ChangePasswordState: State {
     func react(to action: Action) { }
 }
 
-class ChangePasswordFlow: Flow<ChangePasswordState> {
+class ChangePasswordFlow: Flow<ChangePasswordState>, MoviesFlow {
+    
+    static let id: MoviesFlowID = .changePassword
+    
     convenience init() {
         self.init(state: ChangePasswordState())
     }

@@ -12,7 +12,10 @@ struct SignUpState: State {
     func react(to action: Action) { }
 }
 
-class SignUpFlow: Flow<SignUpState> {
+class SignUpFlow: Flow<SignUpState>, MoviesFlow {
+    
+    static let id: MoviesFlowID = .login
+    
     convenience init() {
         self.init(state: SignUpState())
     }

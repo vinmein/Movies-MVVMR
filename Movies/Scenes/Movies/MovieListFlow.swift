@@ -8,7 +8,9 @@
 
 import Foundation
 
-class MovieListFlow: Flow<MovieListState> {
+class MovieListFlow: Flow<MovieListState>, MoviesFlow {
+    
+    static let id: MoviesFlowID = .movieList
     
     let service: MoviesService
     
